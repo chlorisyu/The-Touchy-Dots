@@ -1,0 +1,109 @@
+
+
+ArrayList<Particle> particles = new ArrayList<Particle>();
+ArrayList<Lines> lines = new ArrayList <Lines>();
+
+int savedTime;
+
+  
+void setup() {
+  
+size(1300,780);
+smooth();
+frameRate(5);
+savedTime = millis();
+}
+
+
+void draw() {
+  
+background(random(220,255));
+float s = random(0,40);
+float t = random(200,255);
+float flashTime = random(3000,6000);
+int passedTime = millis()- savedTime;
+if (passedTime>flashTime)
+
+{background(180);
+noStroke();
+fill(61,112,0,t);
+rect(0,0,1300,780);
+savedTime= millis();
+}
+
+
+particles.add(new Particle()); 
+for (int i = 0; i < particles.size(); i++ ) { 
+Particle p = particles.get(i);
+//p.run();
+p.display(s);
+}
+
+lines.add(new Lines()); 
+for (int j = 0; j< lines.size(); j++ ) { 
+Lines l = lines.get(j);
+l.displayline(s);
+l.linerun();
+}
+
+while (lines.size()>5){
+lines.remove(0); 
+}
+}
+//fill(40,147,69);
+ // noStroke();
+ // rect(0,0,1300,780);
+
+
+class Particle {
+float x;
+float y;
+float xspeed;
+float yspeed;
+float t = random(0,255);
+
+Particle() {
+x = random(width/2-400,width/2+400);
+y = random(100,height-100);
+xspeed = random(-3,3);
+yspeed = random(-3,3);
+}
+
+/*void run() {
+x = x + xspeed;
+y = y + yspeed;
+xspeed*=-1;
+yspeed*=-1;
+
+}
+*/
+
+void display(float a) {
+noStroke();
+fill(250, 98,160, random(80,255));
+ellipse(x,y,a,a);
+fill(255, 0,0);
+ellipse(x,y, a/5, a/5);
+}
+
+}
+
+class Lines{
+  float ypos;
+  float ypospeed;
+  
+  Lines(){
+    ypos = random(200,height-200);
+    ypospeed = random(-5,5);
+  }
+  
+  void displayline (float b){
+  stroke(61,112,0, random(150, 255));
+  line(0,ypos,width,ypos+b);
+}
+
+void linerun(){
+  ypos=ypos+ypospeed;
+  ypospeed*=-1;
+}
+}
