@@ -1,0 +1,80 @@
+int xspacing = 40;
+int w;
+
+float yoff = 0.0f;
+float[] yvalues;
+int savedTime;
+
+void setup()
+{
+  size(1300,700);
+  frameRate(20);
+  colorMode(RGB, 255, 255, 255, 100);
+  smooth();
+  w=width+16;
+  yvalues = new float[w/xspacing];
+  savedTime = millis();
+}
+
+void draw()
+{
+  background(0);
+  float t1 = random(3500,8000);
+  float t2 = random(1000,5000);
+  flash(t1, t2);
+  calcWave();
+  renderWave();
+
+
+
+}
+
+
+void calcWave()
+{
+  float dx = 0.05f;
+  float dy = 0.01f;
+  float amplitude = 400.0f;
+  
+  yoff += dy;
+  
+  float xoff = yoff;
+  
+  for (int i=0; i<yvalues.length; i++)
+  {
+    yvalues[i]=(2*noise(xoff, yoff)-1)*amplitude;
+    xoff+=dx;
+  }
+}
+
+void renderWave()
+{
+  for (int x=0; x< yvalues.length; x++)
+  { 
+    float s = random(35,65);
+    noStroke();
+    fill(250,98, 160, random(40,120));
+    ellipseMode(CENTER);
+    ellipse(x*xspacing, 320+yvalues[x],s, s);
+    fill(random(100, 250),0,0);
+    //ellipse(x*xspacing+random(-20,20), random(300,340)+yvalues[x], s/5, s/5);
+    ellipse(x*xspacing, 320+yvalues[x], s/5, s/5);
+
+  }
+}
+
+void flash(float a, float b)
+{
+  int passedTime = millis()-savedTime;
+  if(passedTime>a)
+  {
+    background(61, 112, 0, random(220,250));
+    
+  if(passedTime>a+b)
+  {
+    background(0);
+    savedTime = millis();
+  }
+  }
+}
+  
