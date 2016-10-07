@@ -1,4 +1,4 @@
-# dots, bubbles or circles (a series of art pieces based on an array of pink circles by processing)
+# dots, bubbles or circles (a series of art pieces based on an array of circles by processing)
 
 1. Sakura & the Sea:
 an interactive art to illustrate the moving waves of a white sea that changes with mouse positions with falling sakura petals
@@ -12,5 +12,5 @@ a series of lines in competition with flashing circles quickly increasing in num
 4. simply overwhelming:
 a seires of circles increasing in number and size, overwhelming the screen in a dramatic manner
 
-5. the serpentine line 
+5. the Serpentine Line:
 an undulating line of flashing dots that floats like a snake
